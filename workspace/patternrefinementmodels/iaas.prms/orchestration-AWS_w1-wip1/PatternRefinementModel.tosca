@@ -1,0 +1,538 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+pattern_refinement_models:
+  orchestration-AWS_w1-wip1:
+    is_pdrm: true
+    metadata:
+      targetNamespace: "iaas.prms"
+    detector:
+      node_templates:
+        d_Function_2:
+          type: iaas.nodes.abstract.Function
+          metadata:
+            x: "908"
+            y: "397"
+            displayName: "Function"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - endpoint:
+                node: d_ObjectStorage_0
+                relationship: d_con_ConnectsTo_2
+                capability: storage_endpoint
+            - host:
+                node: d_Serverless-Hosting_0
+                relationship: d_con_HostedOn_4
+                capability: host
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: Invocable
+        d_Serverless-Hosting_1:
+          type: https://patternpedia.org/patternLanguages/componentHostingPatterns.Serverless-Hosting
+          metadata:
+            x: "1380"
+            y: "613"
+            displayName: "Serverless-Hosting"
+        d_Function_3:
+          type: iaas.nodes.abstract.Function
+          metadata:
+            x: "900"
+            y: "41"
+            displayName: "Function"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - endpoint:
+                relationship: tosca.relationships.ConnectsTo
+                capability: Endpoint
+            - host:
+                node: d_Serverless-Hosting_0
+                relationship: d_con_HostedOn_1
+                capability: host
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: Invocable
+        d_Serverless-Hosting_2:
+          type: https://patternpedia.org/patternLanguages/componentHostingPatterns.Serverless-Hosting
+          metadata:
+            x: "1711"
+            y: "588"
+            displayName: "Serverless-Hosting"
+        d_Workflow_0:
+          type: iaas.nodes.abstract.Workflow
+          metadata:
+            x: "327"
+            y: "217"
+            displayName: "Workflow"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - host:
+                node: d_Serverless-Hosting_0
+                relationship: d_con_HostedOn_0
+                capability: host
+            - orchestrator:
+                node: d_Function_3
+                relationship: d_con_Orchestrates_0
+                capability: orchestrated
+            - orchestrator:
+                node: d_Function_0
+                relationship: d_con_Orchestrates_1
+                capability: orchestrated
+            - orchestrator:
+                node: d_Function_1
+                relationship: d_con_Orchestrates_2
+                capability: orchestrated
+            - orchestrator:
+                node: d_Function_2
+                relationship: d_con_Orchestrates_3
+                capability: orchestrated
+            - orchestrator:
+                relationship: iaas.relationships.abstract.Orchestrates
+                capability: Orchestrated
+        d_Function_0:
+          type: iaas.nodes.abstract.Function
+          metadata:
+            x: "894"
+            y: "159"
+            displayName: "Function"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - endpoint:
+                node: d_ObjectStorage_0
+                relationship: d_con_ConnectsTo_0
+                capability: storage_endpoint
+            - host:
+                node: d_Serverless-Hosting_0
+                relationship: d_con_HostedOn_2
+                capability: host
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: Invocable
+        d_Serverless-Hosting_0:
+          type: https://patternpedia.org/patternLanguages/componentHostingPatterns.Serverless-Hosting
+          metadata:
+            x: "595"
+            y: "702"
+            displayName: "Serverless-Hosting"
+        d_Function_1:
+          type: iaas.nodes.abstract.Function
+          metadata:
+            x: "889"
+            y: "280"
+            displayName: "Function"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - endpoint:
+                node: d_ObjectStorage_0
+                relationship: d_con_ConnectsTo_1
+                capability: storage_endpoint
+            - host:
+                node: d_Serverless-Hosting_0
+                relationship: d_con_HostedOn_3
+                capability: host
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: Invocable
+        d_ObjectStorage_0:
+          type: iaas.nodes.abstract.ObjectStorage
+          metadata:
+            x: "1289"
+            y: "216"
+            displayName: "ObjectStorage"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - host:
+                node: d_Serverless-Hosting_1
+                relationship: d_con_HostedOn_5
+                capability: host
+            - invoker:
+                node: d_Function_4
+                relationship: d_con_Triggers_0
+                capability: invocable
+            - invoker:
+                node: iaas.nodes.abstract.Function
+                relationship: iaas.relationships.abstract.Triggers
+                capability: Invocable
+        d_Queue_0:
+          type: iaas.nodes.abstract.Queue
+          metadata:
+            x: "1989"
+            y: "217"
+            displayName: "Queue"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - host:
+                node: d_Serverless-Hosting_3
+                relationship: d_con_HostedOn_7
+                capability: host
+            - invoker:
+                node: iaas.nodes.abstract.Function
+                relationship: iaas.relationships.abstract.Triggers
+                capability: Invocable
+        d_Function_4:
+          type: iaas.nodes.abstract.Function
+          metadata:
+            x: "1641"
+            y: "216"
+            displayName: "Function"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - endpoint:
+                node: d_Queue_0
+                relationship: d_con_ConnectsTo_3
+                capability: queue_endpoint
+            - endpoint:
+                relationship: tosca.relationships.ConnectsTo
+                capability: Endpoint
+            - host:
+                node: d_Serverless-Hosting_2
+                relationship: d_con_HostedOn_6
+                capability: host
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: Invocable
+        d_Serverless-Hosting_3:
+          type: https://patternpedia.org/patternLanguages/componentHostingPatterns.Serverless-Hosting
+          metadata:
+            x: "2071"
+            y: "581"
+            displayName: "Serverless-Hosting"
+      relationship_templates:
+        d_con_Orchestrates_3:
+          type: iaas.relationships.abstract.Orchestrates
+        d_con_Orchestrates_2:
+          type: iaas.relationships.abstract.Orchestrates
+        d_con_Triggers_0:
+          type: iaas.relationships.abstract.Triggers
+        d_con_ConnectsTo_0:
+          type: tosca.relationships.ConnectsTo
+        d_con_ConnectsTo_2:
+          type: tosca.relationships.ConnectsTo
+        d_con_ConnectsTo_1:
+          type: tosca.relationships.ConnectsTo
+        d_con_HostedOn_6:
+          type: tosca.relationships.HostedOn
+        d_con_HostedOn_5:
+          type: tosca.relationships.HostedOn
+        d_con_HostedOn_7:
+          type: tosca.relationships.HostedOn
+        d_con_HostedOn_2:
+          type: tosca.relationships.HostedOn
+        d_con_HostedOn_1:
+          type: tosca.relationships.HostedOn
+        d_con_HostedOn_4:
+          type: tosca.relationships.HostedOn
+        d_con_HostedOn_3:
+          type: tosca.relationships.HostedOn
+        d_con_HostedOn_0:
+          type: tosca.relationships.HostedOn
+        d_con_ConnectsTo_3:
+          type: tosca.relationships.ConnectsTo
+        d_con_Orchestrates_1:
+          type: iaas.relationships.abstract.Orchestrates
+        d_con_Orchestrates_0:
+          type: iaas.relationships.abstract.Orchestrates
+    refinement_structure:
+      node_templates:
+        rs_AwsSFOrchestration_0:
+          type: iaas.nodes.aws.AwsSFOrchestration
+          metadata:
+            x: "431"
+            y: "382"
+            displayName: "AwsSFOrchestration"
+          properties:
+            schedule_expression: "none"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - host:
+                node: rs_AwsPlatform_0
+                relationship: rs_con_HostedOn_0
+                capability: host
+            - orchestrator:
+                node: rs_AwsLambdaFunction_0
+                relationship: rs_con_AwsSFOrchestrates_0
+                capability: orchestrated
+            - orchestrator:
+                node: rs_AwsLambdaFunction_1
+                relationship: rs_con_AwsSFOrchestrates_1
+                capability: orchestrated
+            - orchestrator:
+                node: rs_AwsLambdaFunction_2
+                relationship: rs_con_AwsSFOrchestrates_2
+                capability: orchestrated
+            - orchestrator:
+                node: rs_AwsLambdaFunction_3
+                relationship: rs_con_AwsSFOrchestrates_3
+                capability: orchestrated
+            - orchestrator:
+                relationship: iaas.relationships.aws.AwsSFOrchestrates
+                capability: Orchestrated
+        rs_AwsLambdaFunction_0:
+          type: iaas.nodes.aws.AwsLambdaFunction
+          metadata:
+            x: "1023"
+            y: "105"
+            displayName: "AwsLambdaFunction"
+          properties:
+            handler: "index.handler"
+            memory: 256
+            runtime: "nodejs"
+            alias: "dev"
+            schedule_expression: "none"
+            timeout: 300
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - endpoint:
+                relationship: tosca.relationships.ConnectsTo
+                capability: Endpoint
+            - host:
+                node: rs_AwsPlatform_0
+                relationship: rs_con_HostedOn_1
+                capability: host
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: Invocable
+        rs_AwsS3Bucket_0:
+          type: iaas.nodes.aws.AwsS3Bucket
+          metadata:
+            x: "1467"
+            y: "213"
+            displayName: "AwsS3Bucket"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: tosca.capabilities.Node
+            - host:
+                node: rs_AwsPlatform_0
+                relationship: rs_con_HostedOn_5
+                capability: host
+            - invoker:
+                node: rs_AwsLambdaFunction_4
+                relationship: rs_con_AwsS3Triggers_0
+                capability: invocable
+            - invoker:
+                node: iaas.nodes.aws.AwsLambdaFunction
+                relationship: iaas.relationships.aws.AwsS3Triggers
+                capability: iaas.capabilities.Invocable
+        rs_AwsSQSQueue_0:
+          type: iaas.nodes.aws.AwsSQSQueue
+          metadata:
+            x: "1851"
+            y: "248"
+            displayName: "AwsSQSQueue"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: tosca.capabilities.Node
+            - host:
+                node: iaas.nodes.aws.AwsPlatform
+                relationship: tosca.relationships.HostedOn
+                capability: tosca.capabilities.Container
+            - invoker:
+                node: iaas.nodes.abstract.Function
+                relationship: iaas.relationships.abstract.Triggers
+                capability: iaas.capabilities.Invocable
+        rs_AwsPlatform_0:
+          type: iaas.nodes.aws.AwsPlatform
+          metadata:
+            x: "1358"
+            y: "509"
+            displayName: "AwsPlatform"
+          properties:
+            name: "AWS"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+        rs_AwsLambdaFunction_1:
+          type: iaas.nodes.aws.AwsLambdaFunction
+          metadata:
+            x: "1023"
+            y: "175"
+            displayName: "AwsLambdaFunction"
+          properties:
+            handler: "index.handler"
+            memory: 256
+            runtime: "nodejs"
+            alias: "dev"
+            schedule_expression: "none"
+            timeout: 300
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - endpoint:
+                node: rs_AwsS3Bucket_0
+                relationship: rs_con_ConnectsTo_0
+                capability: storage_endpoint
+            - host:
+                node: rs_AwsPlatform_0
+                relationship: rs_con_HostedOn_2
+                capability: host
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: Invocable
+        rs_AwsLambdaFunction_2:
+          type: iaas.nodes.aws.AwsLambdaFunction
+          metadata:
+            x: "1024"
+            y: "315"
+            displayName: "AwsLambdaFunction"
+          properties:
+            handler: "index.handler"
+            memory: 256
+            runtime: "nodejs"
+            alias: "dev"
+            schedule_expression: "none"
+            timeout: 300
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - endpoint:
+                node: rs_AwsS3Bucket_0
+                relationship: rs_con_ConnectsTo_2
+                capability: storage_endpoint
+            - host:
+                node: rs_AwsPlatform_0
+                relationship: rs_con_HostedOn_3
+                capability: host
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: Invocable
+        rs_AwsLambdaFunction_3:
+          type: iaas.nodes.aws.AwsLambdaFunction
+          metadata:
+            x: "1025"
+            y: "244"
+            displayName: "AwsLambdaFunction"
+          properties:
+            handler: "index.handler"
+            memory: 256
+            runtime: "nodejs"
+            alias: "dev"
+            schedule_expression: "none"
+            timeout: 300
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - endpoint:
+                node: rs_AwsS3Bucket_0
+                relationship: rs_con_ConnectsTo_1
+                capability: storage_endpoint
+            - host:
+                node: rs_AwsPlatform_0
+                relationship: rs_con_HostedOn_4
+                capability: host
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: Invocable
+        rs_AwsLambdaFunction_4:
+          type: iaas.nodes.aws.AwsLambdaFunction
+          metadata:
+            x: "1649"
+            y: "75"
+            displayName: "AwsLambdaFunction"
+          properties:
+            handler: "index.handler"
+            memory: 256
+            runtime: "nodejs"
+            alias: "dev"
+            schedule_expression: "none"
+            timeout: 300
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: tosca.capabilities.Node
+            - endpoint:
+                node: rs_AwsSQSQueue_0
+                relationship: rs_con_ConnectsTo_3
+                capability: queue_endpoint
+            - endpoint:
+                relationship: tosca.relationships.ConnectsTo
+                capability: tosca.capabilities.Endpoint
+            - host:
+                node: iaas.nodes.aws.AwsPlatform
+                relationship: tosca.relationships.HostedOn
+                capability: tosca.capabilities.Container
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: iaas.capabilities.Invocable
+      relationship_templates:
+        rs_con_ConnectsTo_1:
+          type: tosca.relationships.ConnectsTo
+        rs_con_ConnectsTo_0:
+          type: tosca.relationships.ConnectsTo
+        rs_con_ConnectsTo_3:
+          type: tosca.relationships.ConnectsTo
+        rs_con_ConnectsTo_2:
+          type: tosca.relationships.ConnectsTo
+        rs_con_AwsS3Triggers_0:
+          type: iaas.relationships.aws.AwsS3Triggers
+        rs_con_AwsSFOrchestrates_3:
+          type: iaas.relationships.aws.AwsSFOrchestrates
+        rs_con_AwsSFOrchestrates_2:
+          type: iaas.relationships.aws.AwsSFOrchestrates
+        rs_con_AwsSFOrchestrates_1:
+          type: iaas.relationships.aws.AwsSFOrchestrates
+        rs_con_AwsSFOrchestrates_0:
+          type: iaas.relationships.aws.AwsSFOrchestrates
+        rs_con_HostedOn_4:
+          type: tosca.relationships.HostedOn
+        rs_con_HostedOn_5:
+          type: tosca.relationships.HostedOn
+        rs_con_HostedOn_2:
+          type: tosca.relationships.HostedOn
+        rs_con_HostedOn_3:
+          type: tosca.relationships.HostedOn
+        rs_con_HostedOn_0:
+          type: tosca.relationships.HostedOn
+        rs_con_HostedOn_1:
+          type: tosca.relationships.HostedOn
+    relation_mappings:
+      relMap1:
+        direction: outgoing
+        relation_type: iaas.relationships.aws.AwsSFOrchestrates
+        detectorNode: d_Workflow_0
+        refinementNode: rs_AwsSFOrchestration_0
+      relMap0:
+        direction: outgoing
+        relation_type: iaas.relationships.abstract.Orchestrates
+        detectorNode: d_Workflow_0
+        refinementNode: rs_AwsSFOrchestration_0

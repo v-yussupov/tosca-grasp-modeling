@@ -1,0 +1,8 @@
+[
+    {
+      "name": "Pattern Atlas",
+      "url": "http://host.docker.internal:1977/patternatlas/",
+      "ui": "http://host.docker.internal:1978",
+      "patternAtlas": true
+    }
+]

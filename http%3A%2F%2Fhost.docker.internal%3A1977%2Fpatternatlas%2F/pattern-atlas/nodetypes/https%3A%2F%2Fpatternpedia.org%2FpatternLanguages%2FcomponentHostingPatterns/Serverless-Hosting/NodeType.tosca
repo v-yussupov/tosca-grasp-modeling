@@ -1,0 +1,12 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  https://patternpedia.org/patternLanguages/componentHostingPatterns.Serverless-Hosting:
+    metadata:
+      targetNamespace: "https://patternpedia.org/patternLanguages/componentHostingPatterns"
+      abstract: "false"
+      final: "false"
+    capabilities:
+      host:
+        occurrences: [ 1, UNBOUNDED ]
+        type: tosca.capabilities.Container

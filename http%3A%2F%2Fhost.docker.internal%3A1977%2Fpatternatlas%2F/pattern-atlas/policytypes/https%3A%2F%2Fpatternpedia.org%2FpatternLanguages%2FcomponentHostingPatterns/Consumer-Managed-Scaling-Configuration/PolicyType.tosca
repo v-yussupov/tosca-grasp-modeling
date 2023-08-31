@@ -1,0 +1,8 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+policy_types:
+  https://patternpedia.org/patternLanguages/componentHostingPatterns.Consumer-Managed-Scaling-Configuration:
+    metadata:
+      targetNamespace: "https://patternpedia.org/patternLanguages/componentHostingPatterns"
+      abstract: "false"
+      final: "false"

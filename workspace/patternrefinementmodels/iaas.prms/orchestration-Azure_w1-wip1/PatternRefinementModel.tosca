@@ -1,0 +1,603 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+pattern_refinement_models:
+  orchestration-Azure_w1-wip1:
+    is_pdrm: true
+    metadata:
+      targetNamespace: "iaas.prms"
+    detector:
+      node_templates:
+        d_Function_2:
+          type: iaas.nodes.abstract.Function
+          metadata:
+            x: "908"
+            y: "397"
+            displayName: "Function"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - endpoint:
+                node: d_ObjectStorage_0
+                relationship: d_con_ConnectsTo_2
+                capability: storage_endpoint
+            - host:
+                node: d_Serverless-Hosting_0
+                relationship: d_con_HostedOn_4
+                capability: host
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: Invocable
+        d_Serverless-Hosting_1:
+          type: https://patternpedia.org/patternLanguages/componentHostingPatterns.Serverless-Hosting
+          metadata:
+            x: "1380"
+            y: "613"
+            displayName: "Serverless-Hosting"
+        d_Function_3:
+          type: iaas.nodes.abstract.Function
+          metadata:
+            x: "900"
+            y: "41"
+            displayName: "Function"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - endpoint:
+                relationship: tosca.relationships.ConnectsTo
+                capability: Endpoint
+            - host:
+                node: d_Serverless-Hosting_0
+                relationship: d_con_HostedOn_1
+                capability: host
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: Invocable
+        d_Serverless-Hosting_2:
+          type: https://patternpedia.org/patternLanguages/componentHostingPatterns.Serverless-Hosting
+          metadata:
+            x: "1711"
+            y: "588"
+            displayName: "Serverless-Hosting"
+        d_Workflow_0:
+          type: iaas.nodes.abstract.Workflow
+          metadata:
+            x: "327"
+            y: "217"
+            displayName: "Workflow"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - host:
+                node: d_Serverless-Hosting_0
+                relationship: d_con_HostedOn_0
+                capability: host
+            - orchestrator:
+                node: d_Function_3
+                relationship: d_con_Orchestrates_0
+                capability: orchestrated
+            - orchestrator:
+                node: d_Function_0
+                relationship: d_con_Orchestrates_1
+                capability: orchestrated
+            - orchestrator:
+                node: d_Function_1
+                relationship: d_con_Orchestrates_2
+                capability: orchestrated
+            - orchestrator:
+                node: d_Function_2
+                relationship: d_con_Orchestrates_3
+                capability: orchestrated
+            - orchestrator:
+                relationship: iaas.relationships.abstract.Orchestrates
+                capability: Orchestrated
+        d_Function_0:
+          type: iaas.nodes.abstract.Function
+          metadata:
+            x: "894"
+            y: "159"
+            displayName: "Function"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - endpoint:
+                node: d_ObjectStorage_0
+                relationship: d_con_ConnectsTo_0
+                capability: storage_endpoint
+            - host:
+                node: d_Serverless-Hosting_0
+                relationship: d_con_HostedOn_2
+                capability: host
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: Invocable
+        d_Serverless-Hosting_0:
+          type: https://patternpedia.org/patternLanguages/componentHostingPatterns.Serverless-Hosting
+          metadata:
+            x: "595"
+            y: "702"
+            displayName: "Serverless-Hosting"
+        d_Function_1:
+          type: iaas.nodes.abstract.Function
+          metadata:
+            x: "889"
+            y: "280"
+            displayName: "Function"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - endpoint:
+                node: d_ObjectStorage_0
+                relationship: d_con_ConnectsTo_1
+                capability: storage_endpoint
+            - host:
+                node: d_Serverless-Hosting_0
+                relationship: d_con_HostedOn_3
+                capability: host
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: Invocable
+        d_ObjectStorage_0:
+          type: iaas.nodes.abstract.ObjectStorage
+          metadata:
+            x: "1289"
+            y: "216"
+            displayName: "ObjectStorage"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - host:
+                node: d_Serverless-Hosting_1
+                relationship: d_con_HostedOn_5
+                capability: host
+            - invoker:
+                node: d_Function_4
+                relationship: d_con_Triggers_0
+                capability: invocable
+            - invoker:
+                node: iaas.nodes.abstract.Function
+                relationship: iaas.relationships.abstract.Triggers
+                capability: Invocable
+        d_Queue_0:
+          type: iaas.nodes.abstract.Queue
+          metadata:
+            x: "1989"
+            y: "217"
+            displayName: "Queue"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - host:
+                node: d_Serverless-Hosting_3
+                relationship: d_con_HostedOn_7
+                capability: host
+            - invoker:
+                node: iaas.nodes.abstract.Function
+                relationship: iaas.relationships.abstract.Triggers
+                capability: Invocable
+        d_Function_4:
+          type: iaas.nodes.abstract.Function
+          metadata:
+            x: "1641"
+            y: "216"
+            displayName: "Function"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - endpoint:
+                node: d_Queue_0
+                relationship: d_con_ConnectsTo_3
+                capability: queue_endpoint
+            - endpoint:
+                relationship: tosca.relationships.ConnectsTo
+                capability: Endpoint
+            - host:
+                node: d_Serverless-Hosting_2
+                relationship: d_con_HostedOn_6
+                capability: host
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: Invocable
+        d_Serverless-Hosting_3:
+          type: https://patternpedia.org/patternLanguages/componentHostingPatterns.Serverless-Hosting
+          metadata:
+            x: "2071"
+            y: "581"
+            displayName: "Serverless-Hosting"
+      relationship_templates:
+        d_con_Orchestrates_3:
+          type: iaas.relationships.abstract.Orchestrates
+        d_con_Orchestrates_2:
+          type: iaas.relationships.abstract.Orchestrates
+        d_con_Triggers_0:
+          type: iaas.relationships.abstract.Triggers
+        d_con_ConnectsTo_0:
+          type: tosca.relationships.ConnectsTo
+        d_con_ConnectsTo_2:
+          type: tosca.relationships.ConnectsTo
+        d_con_ConnectsTo_1:
+          type: tosca.relationships.ConnectsTo
+        d_con_HostedOn_6:
+          type: tosca.relationships.HostedOn
+        d_con_HostedOn_5:
+          type: tosca.relationships.HostedOn
+        d_con_HostedOn_7:
+          type: tosca.relationships.HostedOn
+        d_con_HostedOn_2:
+          type: tosca.relationships.HostedOn
+        d_con_HostedOn_1:
+          type: tosca.relationships.HostedOn
+        d_con_HostedOn_4:
+          type: tosca.relationships.HostedOn
+        d_con_HostedOn_3:
+          type: tosca.relationships.HostedOn
+        d_con_HostedOn_0:
+          type: tosca.relationships.HostedOn
+        d_con_ConnectsTo_3:
+          type: tosca.relationships.ConnectsTo
+        d_con_Orchestrates_1:
+          type: iaas.relationships.abstract.Orchestrates
+        d_con_Orchestrates_0:
+          type: iaas.relationships.abstract.Orchestrates
+    refinement_structure:
+      node_templates:
+        rs_AzureFunctionApp_0:
+          type: iaas.nodes.azure.AzureFunctionApp
+          metadata:
+            x: "487"
+            y: "560"
+            displayName: "AzureFunctionApp"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: tosca.capabilities.Node
+            - grouping:
+                node: rs_AzureClientFunction_0
+                relationship: rs_con_Groups_0
+                capability: grouped
+            - grouping:
+                node: rs_AzureOrchestratingFunction_0
+                relationship: rs_con_Groups_1
+                capability: grouped
+            - grouping:
+                node: rs_AzureActivityFunction_3
+                relationship: rs_con_Groups_2
+                capability: grouped
+            - grouping:
+                node: rs_AzureActivityFunction_2
+                relationship: rs_con_Groups_3
+                capability: grouped
+            - grouping:
+                node: rs_AzureActivityFunction_1
+                relationship: rs_con_Groups_4
+                capability: grouped
+            - grouping:
+                node: rs_AzureActivityFunction_0
+                relationship: rs_con_Groups_5
+                capability: grouped
+            - grouping:
+                relationship: iaas.relationships.azure.Groups
+                capability: iaas.capabilities.Grouped
+            - host:
+                node: rs_AzurePlatform_0
+                relationship: rs_con_HostedOn_0
+                capability: host
+        rs_AzureActivityFunction_0:
+          type: iaas.nodes.azure.durablefunctions.AzureActivityFunction
+          metadata:
+            x: "968"
+            y: "25"
+            displayName: "AzureActivityFunction"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: tosca.capabilities.Node
+            - endpoint:
+                relationship: tosca.relationships.ConnectsTo
+                capability: tosca.capabilities.Endpoint
+            - host:
+                node: iaas.nodes.azure.AzurePlatform
+                relationship: tosca.relationships.HostedOn
+                capability: tosca.capabilities.Container
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: iaas.capabilities.Invocable
+        rs_AzureActivityFunction_1:
+          type: iaas.nodes.azure.durablefunctions.AzureActivityFunction
+          metadata:
+            x: "976"
+            y: "141"
+            displayName: "AzureActivityFunction"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: tosca.capabilities.Node
+            - endpoint:
+                node: rs_AzureBlobStorageContainer_0
+                relationship: rs_con_ConnectsTo_0
+                capability: storage_endpoint
+            - endpoint:
+                relationship: tosca.relationships.ConnectsTo
+                capability: tosca.capabilities.Endpoint
+            - host:
+                node: iaas.nodes.azure.AzurePlatform
+                relationship: tosca.relationships.HostedOn
+                capability: tosca.capabilities.Container
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: iaas.capabilities.Invocable
+        rs_AzureFunctionApp_1:
+          type: iaas.nodes.azure.AzureFunctionApp
+          metadata:
+            x: "1387"
+            y: "476"
+            displayName: "AzureFunctionApp"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: tosca.capabilities.Node
+            - grouping:
+                node: rs_AzureFunction_3
+                relationship: rs_con_Groups_6
+                capability: grouped
+            - grouping:
+                relationship: iaas.relationships.azure.Groups
+                capability: iaas.capabilities.Grouped
+            - host:
+                node: rs_AzurePlatform_0
+                relationship: rs_con_HostedOn_2
+                capability: host
+        rs_AzureActivityFunction_2:
+          type: iaas.nodes.azure.durablefunctions.AzureActivityFunction
+          metadata:
+            x: "960"
+            y: "252"
+            displayName: "AzureActivityFunction"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: tosca.capabilities.Node
+            - endpoint:
+                node: rs_AzureBlobStorageContainer_0
+                relationship: rs_con_ConnectsTo_1
+                capability: storage_endpoint
+            - endpoint:
+                relationship: tosca.relationships.ConnectsTo
+                capability: tosca.capabilities.Endpoint
+            - host:
+                node: iaas.nodes.azure.AzurePlatform
+                relationship: tosca.relationships.HostedOn
+                capability: tosca.capabilities.Container
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: iaas.capabilities.Invocable
+        rs_AzureActivityFunction_3:
+          type: iaas.nodes.azure.durablefunctions.AzureActivityFunction
+          metadata:
+            x: "976"
+            y: "362"
+            displayName: "AzureActivityFunction"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: tosca.capabilities.Node
+            - endpoint:
+                node: rs_AzureBlobStorageContainer_0
+                relationship: rs_con_ConnectsTo_2
+                capability: storage_endpoint
+            - endpoint:
+                relationship: tosca.relationships.ConnectsTo
+                capability: tosca.capabilities.Endpoint
+            - host:
+                node: iaas.nodes.azure.AzurePlatform
+                relationship: tosca.relationships.HostedOn
+                capability: tosca.capabilities.Container
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: iaas.capabilities.Invocable
+        rs_AzureFunction_3:
+          type: iaas.nodes.azure.AzureFunction
+          metadata:
+            x: "1629"
+            y: "296"
+            displayName: "AzureFunction"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: tosca.capabilities.Node
+            - endpoint:
+                node: rs_AzureStorageQueue_0
+                relationship: rs_con_ConnectsTo_3
+                capability: queue_endpoint
+            - endpoint:
+                relationship: tosca.relationships.ConnectsTo
+                capability: tosca.capabilities.Endpoint
+            - host:
+                node: iaas.nodes.azure.AzurePlatform
+                relationship: tosca.relationships.HostedOn
+                capability: tosca.capabilities.Container
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: iaas.capabilities.Invocable
+        rs_AzureOrchestratingFunction_0:
+          type: iaas.nodes.azure.durablefunctions.AzureOrchestratingFunction
+          metadata:
+            x: "439"
+            y: "123"
+            displayName: "AzureOrchestratingFunction"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: tosca.capabilities.Node
+            - host:
+                node: iaas.nodes.azure.AzurePlatform
+                relationship: tosca.relationships.HostedOn
+                capability: tosca.capabilities.Container
+            - orchestrator:
+                node: rs_AzureActivityFunction_0
+                relationship: rs_con_AzureDFOrchestrates_0
+                capability: orchestrated
+            - orchestrator:
+                node: rs_AzureActivityFunction_1
+                relationship: rs_con_AzureDFOrchestrates_1
+                capability: orchestrated
+            - orchestrator:
+                node: rs_AzureActivityFunction_2
+                relationship: rs_con_AzureDFOrchestrates_2
+                capability: orchestrated
+            - orchestrator:
+                node: rs_AzureActivityFunction_3
+                relationship: rs_con_AzureDFOrchestrates_3
+                capability: orchestrated
+            - orchestrator:
+                node: iaas.nodes.azure.durablefunctions.AzureActivityFunction
+                relationship: iaas.relationships.azure.AzureDFOrchestrates
+                capability: iaas.capabilities.Orchestrated
+        rs_AzurePlatform_0:
+          type: iaas.nodes.azure.AzurePlatform
+          metadata:
+            x: "1213"
+            y: "650"
+            displayName: "AzurePlatform"
+          properties:
+            account_type: "Standard_RAGRS"
+            storage_kind: "StorageV2"
+            name: "Azure"
+            access_tier: "Hot"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: tosca.capabilities.Node
+        rs_AzureStorageQueue_0:
+          type: iaas.nodes.azure.AzureStorageQueue
+          metadata:
+            x: "1928"
+            y: "409"
+            displayName: "AzureStorageQueue"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: tosca.capabilities.Node
+            - host:
+                node: rs_AzurePlatform_0
+                relationship: rs_con_HostedOn_3
+                capability: host
+            - invoker:
+                node: iaas.nodes.abstract.Function
+                relationship: iaas.relationships.abstract.Triggers
+                capability: iaas.capabilities.Invocable
+        rs_AzureBlobStorageContainer_0:
+          type: iaas.nodes.azure.AzureBlobStorageContainer
+          metadata:
+            x: "1343"
+            y: "191"
+            displayName: "AzureBlobStorageContainer"
+          properties:
+            size: "0 MB"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: tosca.capabilities.Node
+            - host:
+                node: rs_AzurePlatform_0
+                relationship: rs_con_HostedOn_1
+                capability: host
+            - invoker:
+                node: rs_AzureFunction_3
+                relationship: rs_con_AzureBlobContainerTriggers_0
+                capability: invocable
+            - invoker:
+                node: iaas.nodes.azure.AzureFunction
+                relationship: iaas.relationships.azure.AzureBlobContainerTriggers
+                capability: iaas.capabilities.Invocable
+        rs_AzureClientFunction_0:
+          type: iaas.nodes.azure.durablefunctions.AzureClientFunction
+          metadata:
+            x: "351"
+            y: "373"
+            displayName: "AzureClientFunction"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: tosca.capabilities.Node
+            - endpoint:
+                relationship: tosca.relationships.ConnectsTo
+                capability: tosca.capabilities.Endpoint
+            - host:
+                node: iaas.nodes.azure.AzurePlatform
+                relationship: tosca.relationships.HostedOn
+                capability: tosca.capabilities.Container
+            - invoker:
+                node: rs_AzureOrchestratingFunction_0
+                relationship: rs_con_AzureDFClientFunctionTriggers_0
+                capability: invocable
+      relationship_templates:
+        rs_con_ConnectsTo_1:
+          type: tosca.relationships.ConnectsTo
+        rs_con_ConnectsTo_0:
+          type: tosca.relationships.ConnectsTo
+        rs_con_ConnectsTo_3:
+          type: tosca.relationships.ConnectsTo
+        rs_con_ConnectsTo_2:
+          type: tosca.relationships.ConnectsTo
+        rs_con_Groups_6:
+          type: iaas.relationships.azure.Groups
+        rs_con_Groups_5:
+          type: iaas.relationships.azure.Groups
+        rs_con_Groups_4:
+          type: iaas.relationships.azure.Groups
+        rs_con_Groups_3:
+          type: iaas.relationships.azure.Groups
+        rs_con_Groups_2:
+          type: iaas.relationships.azure.Groups
+        rs_con_Groups_1:
+          type: iaas.relationships.azure.Groups
+        rs_con_Groups_0:
+          type: iaas.relationships.azure.Groups
+        rs_con_AzureDFClientFunctionTriggers_0:
+          type: iaas.relationships.azure.AzureDFClientFunctionTriggers
+        rs_con_AzureBlobContainerTriggers_0:
+          type: iaas.relationships.azure.AzureBlobContainerTriggers
+        rs_con_HostedOn_2:
+          type: tosca.relationships.HostedOn
+        rs_con_HostedOn_3:
+          type: tosca.relationships.HostedOn
+        rs_con_HostedOn_0:
+          type: tosca.relationships.HostedOn
+        rs_con_AzureDFOrchestrates_3:
+          type: iaas.relationships.azure.AzureDFOrchestrates
+        rs_con_AzureDFOrchestrates_2:
+          type: iaas.relationships.azure.AzureDFOrchestrates
+        rs_con_HostedOn_1:
+          type: tosca.relationships.HostedOn
+        rs_con_AzureDFOrchestrates_1:
+          type: iaas.relationships.azure.AzureDFOrchestrates
+        rs_con_AzureDFOrchestrates_0:
+          type: iaas.relationships.azure.AzureDFOrchestrates

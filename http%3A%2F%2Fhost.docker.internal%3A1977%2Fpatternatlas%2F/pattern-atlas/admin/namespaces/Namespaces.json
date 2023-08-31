@@ -1,0 +1,34 @@
+{
+  "https://patternpedia.org/patternLanguages/componentHostingPatterns" : {
+    "namespace" : "https://patternpedia.org/patternLanguages/componentHostingPatterns",
+    "prefix" : "ComponentHostingPatterns",
+    "readableName" : "",
+    "generatedNamespace" : false,
+    "patternCollection" : true,
+    "secureCollection" : false
+  },
+  "https://patternpedia.org/patternLanguages/cloudComputingPatterns" : {
+    "namespace" : "https://patternpedia.org/patternLanguages/cloudComputingPatterns",
+    "prefix" : "CloudComputingPatterns",
+    "readableName" : "",
+    "generatedNamespace" : false,
+    "patternCollection" : true,
+    "secureCollection" : false
+  },
+  "https://patternpedia.org/patternLanguages/quantumAlgorithmPatterns" : {
+    "namespace" : "https://patternpedia.org/patternLanguages/quantumAlgorithmPatterns",
+    "prefix" : "QuantumComputingPatterns",
+    "readableName" : "",
+    "generatedNamespace" : false,
+    "patternCollection" : true,
+    "secureCollection" : false
+  },
+  "https://patternpedia.org/patternLanguages/eip" : {
+    "namespace" : "https://patternpedia.org/patternLanguages/eip",
+    "prefix" : "EnterpriseIntegrationPatterns",
+    "readableName" : "",
+    "generatedNamespace" : false,
+    "patternCollection" : true,
+    "secureCollection" : false
+  }
+}

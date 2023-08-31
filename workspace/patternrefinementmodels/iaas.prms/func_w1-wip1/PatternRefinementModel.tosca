@@ -1,0 +1,85 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+pattern_refinement_models:
+  func_w1-wip1:
+    is_pdrm: true
+    metadata:
+      targetNamespace: "iaas.prms"
+    detector:
+      node_templates:
+        d_Function_0:
+          type: iaas.nodes.abstract.Function
+          metadata:
+            x: "556"
+            y: "128"
+            displayName: "Function"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - endpoint:
+                relationship: tosca.relationships.ConnectsTo
+                capability: Endpoint
+            - host:
+                node: d_Serverless-Hosting_0
+                relationship: d_con_HostedOn_0
+                capability: host
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: Invocable
+        d_Serverless-Hosting_0:
+          type: https://patternpedia.org/patternLanguages/componentHostingPatterns.Serverless-Hosting
+          metadata:
+            x: "555"
+            y: "366"
+            displayName: "Serverless-Hosting"
+      relationship_templates:
+        d_con_HostedOn_0:
+          type: tosca.relationships.HostedOn
+    refinement_structure:
+      node_templates:
+        rs_AwsLambdaFunction_0:
+          type: iaas.nodes.aws.AwsLambdaFunction
+          metadata:
+            x: "584"
+            y: "104"
+            displayName: "AwsLambdaFunction"
+          properties:
+            handler: "index.handler"
+            memory: 256
+            runtime: "nodejs"
+            alias: "dev"
+            schedule_expression: "none"
+            timeout: 300
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+            - endpoint:
+                relationship: tosca.relationships.ConnectsTo
+                capability: Endpoint
+            - host:
+                node: rs_AwsPlatform_0
+                relationship: rs_con_HostedOn_0
+                capability: host
+            - invoker:
+                relationship: iaas.relationships.abstract.Triggers
+                capability: Invocable
+        rs_AwsPlatform_0:
+          type: iaas.nodes.aws.AwsPlatform
+          metadata:
+            x: "583"
+            y: "328"
+            displayName: "AwsPlatform"
+          properties:
+            name: "AWS"
+          requirements:
+            - dependency:
+                node: tosca.nodes.Root
+                relationship: tosca.relationships.DependsOn
+                capability: Node
+      relationship_templates:
+        rs_con_HostedOn_0:
+          type: tosca.relationships.HostedOn
